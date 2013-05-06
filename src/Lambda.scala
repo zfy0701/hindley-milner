@@ -1,6 +1,5 @@
 import scala.util.parsing.combinator._
-import util.parsing.combinator.syntactical.StandardTokenParsers
-import util.parsing.combinator.ImplicitConversions
+import util.parsing.combinator.syntactical._
 
 object Lambda extends StandardTokenParsers with ImplicitConversions {
   lexical.delimiters ++= ("\\ => + - * / ( ) , == = ;" split ' ')

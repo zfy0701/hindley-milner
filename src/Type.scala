@@ -11,7 +11,7 @@ case class Arrow(t1: Type, t2: Type) extends Type {
 
 // Type variable, name is the variable name
 case class TVar(name: String) extends Type {
-  var realType: Type = this;
-  override def toString = if (realType == this) name else realType.toString()
+  var pointTo: Type = this;
+  override def toString = if (pointTo == this) name else pointTo.toString()
 }
 

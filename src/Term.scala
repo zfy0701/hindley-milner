@@ -13,26 +13,26 @@ sealed abstract class Term {
   }
 
   def toString(n: Int): String
-  override def toString = toString(0)
+  override def toString = toString(0) + typeInfo
 }
 
 case class Const(v: Any, ty: Type) extends Term {
   t = Some(ty)
-  override def toString(n: Int) = (" " * n) + v.toString + typeInfo
+  override def toString(n: Int) = (" " * n) + v.toString
 }
 
 case class Var(name: String) extends Term {
-  override def toString(n: Int) = (" " * n) + name.toString + typeInfo
+  override def toString(n: Int) = (" " * n) + name.toString
 }
 
 case class Abs(x: Var, e: Term) extends Term {
-  override def toString(n: Int) = (" " * n) + "(\\" + x.toString(0) + " => " + e.toString(0) + ")" + typeInfo
+  override def toString(n: Int) = (" " * n) + "(\\" + x.toString() + " => " + e.toString() + ")"
 }
 
 case class App(e1: Term, e2: Term) extends Term {
-  override def toString(n: Int) = (" " * n) + "(" + e1.toString(0) + ", " + e2.toString(0) + ")" + typeInfo
+  override def toString(n: Int) = (" " * n) + "(" + e1.toString() + ", " + e2.toString() + ")"
 }
 
 case class Let(x: Var, e1: Term, e2: Term) extends Term {
-  override def toString(n: Int) = (" " * n) + "Let " + x.toString(0) + " = " + e1.toString(0) + " in\n" + e2.toString(n + 4) + ")" + typeInfo
+  override def toString(n: Int) = (" " * n) + "Let " + x.toString() + " = " + e1.toString() + " in\n" + e2.toString(n + 4) + ")"
 }

@@ -12,8 +12,8 @@ object Inferencer {
   def Find(t: Type): Type = {
     t match {
       case tv: TVar => {
-        if (tv.realType != tv) tv.realType = Find(tv.realType)
-        tv.realType
+        if (tv.pointTo != tv) tv.pointTo = Find(tv.pointTo)
+        tv.pointTo
       }
       case _ => t
     }
@@ -33,7 +33,7 @@ object Inferencer {
       if (occurs(ta, tb))
         throw new Exception("no rec type please")
       // do not need find again here
-      ta.realType = tb
+      ta.pointTo = tb
     }
   }
 
@@ -107,10 +107,6 @@ object Inferencer {
   }
 
   def main(args: Array[String]) {
-    //    val expr = Lambda.parse("let f = \\x => x in let _ = (f 3) in (f false)" )
-    //    println(expr)
-    //    Inferencer.Infer(expr)
-    //    println(expr)
     val expr = Lambda.parse("""let f = (\x => (\x => x)) in let _ = (f 3) in (f "str")""")
     println(expr)
     Inferencer.Infer(expr)
