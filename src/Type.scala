@@ -6,7 +6,7 @@ case class Prim(name: String) extends Type {
 
 // Lambda type: t1 -> t2
 case class Arrow(t1: Type, t2: Type) extends Type {
-  override def toString = t1.toString() + "->" + (t2 match {case Arrow(_, _) => "("+  t2.toString() + ")" case _ =>  t2.toString()})
+  override def toString = t1.toString() + "->" + (t2 match { case Arrow(_, _) => "(" + t2.toString() + ")" case _ => t2.toString() })
 }
 
 // Type variable, name is the variable name

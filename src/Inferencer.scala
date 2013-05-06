@@ -81,12 +81,12 @@ object Inferencer {
       }
       case Abs(x, e) => {
         val tx = ctx.get(x) match { case Some(t) => t case None => MakeFreshTVar() }
-        val te = Analyze(ctx + ( x -> tx ), e)
+        val te = Analyze(ctx + (x -> tx), e)
         Arrow(tx, te)
       }
       case Let(x, e1, e2) => {
         var te1 = Analyze(ctx, e1)
-        Analyze(ctx + { x -> te1 }, e2)
+        Analyze(ctx + ( x -> te1 ), e2)
       }
       case App(e1, e2) => {
         val te1 = Analyze(ctx, e1)

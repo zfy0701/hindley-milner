@@ -5,12 +5,7 @@ sealed abstract class Term {
   // This is the type annotation in the language
   var t: Option[Type] = None
 
-  def typeInfo = {
-    t match {
-      case None => ""
-      case Some(ty) => ": " + ty.toString()
-    }
-  }
+  def typeInfo = t match { case None => "" case Some(ty) => ": " + ty.toString() }
 
   def toString(n: Int): String
   override def toString = toString(0) + typeInfo
