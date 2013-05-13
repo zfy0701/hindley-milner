@@ -1,4 +1,4 @@
-import scala.collection.mutable.{ Map, HashMap, Set }
+import scala.collection.immutable.{ Map, HashMap, Set }
 
 object Inferencer {
   type Context = Map[Var, Type]
@@ -49,7 +49,7 @@ object Inferencer {
 
   def Inst(t: Type, ctx: Context): Type = {
     val bindVar = ctx.values.toSet
-    val gen = new HashMap[TVar, TVar]
+    val gen = new collection.mutable.HashMap[TVar, TVar]
     def reify(t: Type): Type = { // Try to iterate all free TVar of the type
       Find(t) match {
         case tv: TVar => {
